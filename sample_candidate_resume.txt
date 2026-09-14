@@ -1,0 +1,30 @@
+Sarah Jenkins
+Senior Distributed Systems & Fullstack Engineer
+Email: sarah.jenkins@techdev.io | Phone: +1-555-019-2834 | GitHub: github.com/sarahjenkins-dev | LinkedIn: linkedin.com/in/sarahjenkins-cloud
+
+PROFESSIONAL SUMMARY
+Senior Software Architect with 6+ years of experience designing high-throughput distributed architectures, microservices, and reactive full-stack web platforms using Python, FastAPI, TypeScript, React, Next.js, Docker, Kubernetes, PostgreSQL, and Redis.
+
+CORE TECHNICAL SKILLS
+- Languages: Python, TypeScript, JavaScript, SQL, Go, Rust
+- Frontend: React, Next.js, Tailwind CSS, Redux, Zustand
+- Backend & Systems: FastAPI, Node.js, REST APIs, GraphQL, gRPC, Microservices, System Design
+- Databases & Caching: PostgreSQL, Redis, MongoDB
+- DevOps & Cloud: Docker, Kubernetes, AWS, Git, CI/CD
+
+PROFESSIONAL EXPERIENCE
+Senior Backend & Systems Engineer | CloudScale Networks (2022 - Present)
+- Engineered event-driven microservices using Python, FastAPI, and Redis caching, reducing p99 API response latency by 44%.
+- Designed and migrated core PostgreSQL relational schemas handling over 25M daily transactions with 99.99% reliability.
+- Containerized application services using Docker and orchestrated multi-region Kubernetes clusters on AWS with automated CI/CD pipelines.
+
+Full Stack Engineer | Apex Data Labs (2019 - 2022)
+- Built interactive analytics dashboards using Next.js, React, and TypeScript with real-time WebSocket data feeds.
+- Developed scalable REST APIs and GraphQL federation layers backed by Python services.
+
+PROJECTS & ARCHITECTURE
+- Distributed Consensus Engine: High-performance Raft-based state machine replication built in Go and Python.
+- Real-time Telemetry Visualizer: Next.js + React dashboard streaming live metrics with sub-100ms render updates.
+
+EDUCATION
+B.S. in Computer Science & Engineering | University of Technology, 2019

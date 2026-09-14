@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # ----------------------------------------------------
+  # PostgreSQL Database
+  # ----------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: interviewiq-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: interviewiq
+      POSTGRES_PASSWORD: interviewiq
+      POSTGRES_DB: interviewiq
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U interviewiq -d interviewiq"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ----------------------------------------------------
+  # Redis Cache & Message Broker
+  # ----------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: interviewiq-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ----------------------------------------------------
+  # FastAPI Backend API Server
+  # ----------------------------------------------------
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: interviewiq-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=local
+      - DEBUG=true
+      - DATABASE_URL=postgresql+asyncpg://interviewiq:interviewiq@postgres:5432/interviewiq
+      - REDIS_URL=redis://redis:6379/0
+      - BACKEND_CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+      - SECRET_KEY=interviewiq-super-secret-key-32chars-min-length-2026!
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # ----------------------------------------------------
+  # Next.js Frontend Application
+  # ----------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: interviewiq-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  redis_data:
